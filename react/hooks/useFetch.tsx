@@ -53,3 +53,5 @@ const useFetch = ({ url }: userFetchProps) => {
 
 
 export default useFetch
+
+//const { data, loading, error } = useFetch({ url: 'http://example.com' })
