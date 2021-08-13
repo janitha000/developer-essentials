@@ -1,0 +1,27 @@
+.vehicle {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(221, 221, 221);
+    height: 400px;
+    width: 400px;
+
+    &__items {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+    }
+
+    &__item{
+        & > span{
+            font-weight: 800;
+        }
+
+    }
+
+    &__img > img{
+        max-width: 100%;
+        max-height: 100%;
+    }
+
+
+
+}

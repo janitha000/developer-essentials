@@ -1,0 +1,25 @@
+@mixin flex-center{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.flex-item{
+    @include flex-center;
+}
+
+@mixin button-variant($background, $text) {
+    color: $text;
+    background-color: $background;
+}
+
+.button-module{
+    &.primary{
+        @include button-variant($primary-clr, $primary-text-clr);
+    }
+
+    &.secondary{
+        @include button-variant($secondary-clr, $secondary-text-clr);
+    }
+
+}

@@ -1,0 +1,18 @@
+.login {
+    margin: auto;
+    display: flex;
+    justify-content: center;
+    height: 100%;
+
+    & >  form {
+        display: flex;
+        flex-direction: column;
+        min-width: 400px;
+
+        & > input {
+            min-width: 200px;
+            margin-left : auto;
+            margin-right: auto;
+        }
+    }
+}
