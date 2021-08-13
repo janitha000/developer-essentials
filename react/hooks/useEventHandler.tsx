@@ -15,3 +15,8 @@ const UseEventHandler = ({ eventType, handler }: UseEventHandlerProps) => {
 }
 
 export default UseEventHandler;
+
+// UseEventHandler({ eventType: 'click', handler: handlerCallback })
+// const handlerCallback = useCallback(() => {
+//     alert('clicked from callback')
+// }, [])
