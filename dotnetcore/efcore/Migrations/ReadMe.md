@@ -10,3 +10,4 @@ dotnet ef database update
 
 To specify the project and a specific conbtext
  - dotnet ef migrations add InitialCreate --project ../ContosoPets.DataAccess/ContosoPets.DataAccess.csproj --context ContosoPetsContext
+ - dotnet ef database update --project ../ContosoPets.DataAccess/ContosoPets.DataAccess.csproj --context ContosoPetsContext
