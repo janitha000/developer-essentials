@@ -6,3 +6,7 @@ dotnet ef database update
 
 dotnet ef migrations add MaxLengthOnNames
 dotnet ef database update
+
+
+To specify the project and a specific conbtext
+ - dotnet ef migrations add InitialCreate --project ../ContosoPets.DataAccess/ContosoPets.DataAccess.csproj --context ContosoPetsContext
