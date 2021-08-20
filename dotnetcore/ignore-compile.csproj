@@ -1,0 +1,3 @@
+<ItemGroup>
+    <Compile Remove="Controllers\OrdersController.cs" />
+  </ItemGroup>
