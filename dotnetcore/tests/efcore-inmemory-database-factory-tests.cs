@@ -47,7 +47,7 @@
     }
 
 
-//Test class
+//Test class (use fixture : one context for all test cases)
 private readonly TestBase _testBase;
 
 public ToDoServiceTests(TestBase testbase)
@@ -63,4 +63,27 @@ public async Task ShouldReturnAllToDoItems()
 
     result.ShouldNotBeEmpty();
     result.Count().ShouldBe(3);
+}
+
+//Test class for write (one context per each test case)
+ public class TodiItemWriteTests : TestBase
+{
+    [Fact]
+    public async Task Add_Should_Given()
+    {
+        var todoItem = new ToDoItem
+        {
+            Id = 5,
+        Description = "Write my test examples.",
+            IsCompleted = false
+        };
+
+        var service = new ToDoService(base.Context);
+
+        await service.Add(todoItem);
+
+        var entity = await Context.ToDoItems.FindAsync(todoItem.Id);
+
+        entity.ShouldNotBeNull();
+    }
 }
