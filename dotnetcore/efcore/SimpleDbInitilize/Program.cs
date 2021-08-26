@@ -28,3 +28,13 @@ public class Program
             }
         }
 }
+
+//this can be done in the startup.cs as well
+public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+{
+    using (var serviceScope = app.ApplicationServices.CreateScope())
+    {
+        var context = serviceScope.ServiceProvider.GetService<ApplicationDbContext>();
+        DbInitialiser.Initialize(context);
+    }
+}
