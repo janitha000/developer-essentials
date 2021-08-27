@@ -5,3 +5,5 @@ Run application using command line
     
 
 Clean Architecture Example - https://github.com/SSWConsulting/CleanArchSprPwrsAug2021/tree/main/CaWorkshop
+
+Clean Architecture Template - https://github.com/jasontaylordev/CleanArchitecture
