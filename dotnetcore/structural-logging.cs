@@ -11,3 +11,10 @@ _logger.LogInformatiion("Adding numbers : {@Numbers}", numbers)
 
 //Startup.cs
 services.AddLogging(loggingBuilder => {loggingBuilder.AddSeq(); })
+
+
+//DB logging
+services.AddDbContext<ApplicationDbContext>(options =>
+                    options.UseSqlServer(
+                        configuration.GetConnectionString("DefaultConnection")
+                    ).LogTo(Console.WriteLine, LogLevel.Information);
