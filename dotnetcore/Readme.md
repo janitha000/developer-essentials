@@ -2,6 +2,10 @@ Run application using command line
     - dotnet publish -o ./published
     - cd published
     - dotnet projectName.dll
+
+SQL Server Docker
+ - docker run -e "ACCEPT_EULA=Y" -e "SA_PASSWORD=root" -p 1433:1433 -d mcr.microsoft.com/mssql/server:2017-latest
+
     
 
 Clean Architecture Example - https://github.com/SSWConsulting/CleanArchSprPwrsAug2021/tree/main/CaWorkshop
