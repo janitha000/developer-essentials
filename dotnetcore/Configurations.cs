@@ -27,3 +27,6 @@ public WeatherForecastController( IOptions<BaseConfiguration> options)
         }
 
 var settings = Options.Value;
+
+//set env variable | windows
+set BaseUrl__Type = Http
