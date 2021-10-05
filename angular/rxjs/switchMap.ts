@@ -1,5 +1,7 @@
 //Run an observable inside an observable
 
+//scenario 1 - return output from the inner observable
+
 const firebase1$ = simulateFirebase("FB-1 ", 5000);
 const firebase2$ = simulateFirebase("FB-2 ", 1000);
 
@@ -30,3 +32,20 @@ source value FB-1  2
     inner observable  1
     inner observable  2
 ...
+
+//scenario 2 return result from both observables
+const course$ = simulateHttp({id:1, description: 'Angular For Beginners'}, 1000);
+
+const httpResult$ = course$.pipe(
+    switchMap(courses => simulateHttp([], 2000)
+                  .pipe(
+                     map(lessons => [courses,lessons])
+                  ),
+    )
+);
+
+httpResult$.subscribe(
+    console.log,
+    console.error,
+    () => console.log('completed httpResult$')
+);
