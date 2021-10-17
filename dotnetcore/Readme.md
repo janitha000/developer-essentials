@@ -11,3 +11,7 @@ SQL Server Docker
 Clean Architecture Example - https://github.com/SSWConsulting/CleanArchSprPwrsAug2021/tree/main/CaWorkshop
 
 Clean Architecture Template - https://github.com/jasontaylordev/CleanArchitecture
+
+Paging using cursor - https://khalidabuhakmeh.com/cursor-paging-with-entity-framework-core-and-aspnet-core
+
+
