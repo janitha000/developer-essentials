@@ -43,3 +43,21 @@
     ```
     - this will run for every parameter (but only on first time)
     - use revalidate for refresh/update the content as needed
+
+## Preview mode
+
+- getStaticProps will be only called once in production
+- If need this to be off we can use Preview mode (call again for new page in production)
+    - use case : check preview after drafting a blog post
+    - we can't make `revalidate : 1` since this will be too much calls
+    - we can get the control on when the get the new page
+
+- create api to enable preview mode
+- this will store cookies on user browser to enable this 
+
+```
+export function enable-preview(req, res) {
+    res.setPreviewData()
+}
+```
+- once done remove the cookies from user browser
