@@ -17,13 +17,13 @@
     - then if the page is not yet created, it will be created at the request
     - afterwards will be served from the disk/cdn
 
-    `
+    ```
     const Home = (props) => {
         if(router.isFallback) return <p1>Loading ... </p1>
 
         return <p1>Loaded</p1>   
     }
-    `
+    ```
 
     - will have to wait until GetStaticProps gets executed
     - kind of like client side rendering with loaders
@@ -33,13 +33,13 @@
     - no loaedrs needed
     - first visitor will have little delay
 
-    `
+    ```
         export function getStaticPaths() {
             return {
                 fallback: 'blocking',
                 paths; []
             }
         }
-    `
+    ```
     - this will run for every parameter (but only on first time)
     - use revalidate for refresh/update the content as needed
