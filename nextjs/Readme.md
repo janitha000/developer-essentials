@@ -30,3 +30,13 @@
     - nothing will be returned until GetStaticProps executed
     - no loaedrs needed
     - first visitor will have little delay
+
+    `
+        export function getStaticPaths() {
+            return {
+                fallback: 'blocking',
+                paths; []
+            }
+        }
+    `
+    - this will run for every parameter (but only on first time)
