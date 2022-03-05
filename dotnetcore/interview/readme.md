@@ -49,4 +49,7 @@
 - task does parellel processing
 - threads will always run on one core while tasks are not
 
- 
+### CQRS
+- command query seggregation 
+- commands(add/delete/update) and query(reads) should use different models
+    - query will use dtos, no need of validations etc...
