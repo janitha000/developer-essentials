@@ -53,3 +53,9 @@
 - command query seggregation 
 - commands(add/delete/update) and query(reads) should use different models
     - query will use dtos, no need of validations etc...
+
+### ACID
+- Atomicity: It ensures all-or-none rule for database modifications.
+- Consistency: Data values are consistent across the database.
+- Isolation: Two transactions are said to be independent of one another.
+- Durability: Data is not lost even at the time of server failure.
