@@ -25,6 +25,27 @@
 - challenges
     - completely make independent services in a domian
 
+- Independently deployable
+- Can have different tech stacks (right tool for the job)
+- Precise scaling
+
+- cons
+    - more complexity
+
+#### BFF Pattern (backend for frontend)
+- inserts a layer between user and the resoucrce
+- rather than supporting one backend based on the user create multiple backends (mobile, desktop etc...)
+
+#### Service discovery pattern
+- allow applications to find each other services
+- due to dynamically changing services
+
+#### Anti patterns
+- dont' start with micro services, only use when needed
+- dont do it without devops
+- dont make many microservices by making them small
+
+
 ### Three tier architecture
 - organizes application into three logical and physical computing tires
     - presentation tier (UI) - React, Angular etc....
