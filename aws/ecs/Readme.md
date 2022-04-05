@@ -1,0 +1,2 @@
+- Fargate with cloudformation
+    - https://towardsdatascience.com/deploying-web-applications-with-docker-in-aws-fargate-bb942de733a4
