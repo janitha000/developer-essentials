@@ -1,0 +1,204 @@
+AWSTemplateFormatVersion: 2010-09-09
+Description: EC2 Instance setup on public subnet for MyVPC stack
+Parameters: 
+  VPCStackName:
+    Description: The stack name of VPC cloudformation stack
+    Type: String
+    Default: MyVPC
+  EC2PrivateKey:
+    Description: Private key for EC2 instances
+    Type: AWS::EC2::KeyPair::KeyName
+Resources: 
+#EC2 instance which will be on private subnet
+  BackEndServerEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref EC2PrivateKey
+      ImageId: ami-03c3a7e4263fd998c
+      InstanceType: t2.micro
+      Monitoring: true
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: false
+          PrivateIpAddress: 10.0.2.4
+          SubnetId: 
+            Fn::ImportValue: !Sub ${VPCStackName}-Private-1
+          DeviceIndex: 0
+          Description: Primary network interface for EC2 instance
+          GroupSet: 
+            - !Ref ServerSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-EC2
+      BlockDeviceMappings:
+        - DeviceName: /dev/sd1
+          Ebs: 
+            VolumeSize: 8
+#EC2 instance which will be on private subnet
+  FrontEndServerEC2:
+    Type: AWS::EC2::Instance
+    Properties:
+      KeyName: !Ref EC2PrivateKey
+      ImageId: ami-03c3a7e4263fd998c
+      InstanceType: t2.micro
+      Monitoring: true
+      NetworkInterfaces:
+        - AssociatePublicIpAddress: true
+          PrivateIpAddress: 10.0.0.4
+          SubnetId: 
+            Fn::ImportValue: !Sub ${VPCStackName}-Public-1
+          DeviceIndex: 0
+          Description: Primary network interface for EC2 instance
+          GroupSet: 
+            - !Ref ClientSecurityGroup
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-EC2
+      BlockDeviceMappings:
+        - DeviceName: /dev/sd1
+          Ebs: 
+            VolumeSize: 8
+#Server security group  
+  ServerSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub ${AWS::StackName}-Server-SG
+      GroupDescription: Server Security Group
+      VpcId: 
+        Fn::ImportValue: !Sub ${VPCStackName}-VPC
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: TCP
+          FromPort: 22
+          ToPort: 22
+        - SourceSecurityGroupId: !Ref LoadBalancerSG
+          IpProtocol: TCP
+          FromPort: 8080
+          ToPort: 8080
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: -1
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-SG-Server
+  ClientSecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub ${AWS::StackName}-Client-SG
+      GroupDescription: Client Security Group
+      VpcId: 
+        Fn::ImportValue: !Sub ${VPCStackName}-VPC
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: TCP
+          FromPort: 22
+          ToPort: 22
+        - SourceSecurityGroupId: !Ref LoadBalancerSG
+          IpProtocol: TCP
+          FromPort: 5000
+          ToPort: 5000
+      SecurityGroupEgress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: -1
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-SG-Client
+# Load balancer
+  ServerTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckEnabled: false
+      HealthCheckPath: /api/health
+      HealthCheckProtocol: HTTP
+      Matcher:
+        HttpCode: 200
+      Port: 8080
+      Protocol: HTTP
+      ProtocolVersion: HTTP1
+      Name: !Sub ${AWS::StackName}-ServerTG
+      TargetType: instance
+      Targets:
+        - Id: !Ref BackEndServerEC2
+          Port: 8080
+      VpcId:
+        Fn::ImportValue: !Sub ${VPCStackName}-VPC
+  ClientTargetGroup:
+    Type: AWS::ElasticLoadBalancingV2::TargetGroup
+    Properties:
+      HealthCheckEnabled: false
+      HealthCheckPath: /index.html
+      HealthCheckProtocol: HTTP
+      Matcher:
+        HttpCode: 200
+      Port: 5000
+      Protocol: HTTP
+      ProtocolVersion: HTTP1
+      Name: !Sub ${AWS::StackName}-ClientTG
+      TargetType: instance
+      Targets:
+        - Id: !Ref FrontEndServerEC2
+          Port: 5000
+      VpcId:
+        Fn::ImportValue: !Sub ${VPCStackName}-VPC
+  LoadBalancerSG:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupName: !Sub ${AWS::StackName}-ELB-SG
+      GroupDescription: Load balancer security group
+      VpcId: 
+        Fn::ImportValue: !Sub ${VPCStackName}-VPC
+      SecurityGroupIngress:
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: TCP
+          FromPort: 8080
+          ToPort: 8080
+        - CidrIp: 0.0.0.0/0
+          IpProtocol: TCP
+          FromPort: 5000
+          ToPort: 5000
+      SecurityGroupEgress:
+        - CidrIp: '0.0.0.0/0'
+          IpProtocol: -1 
+      Tags:
+        - Key: Name
+          Value: !Sub ${AWS::StackName}-ELB-SG
+  LoadBalancer:
+    Type: AWS::ElasticLoadBalancingV2::LoadBalancer
+    Properties:
+      IpAddressType: ipv4
+      Name: !Sub ${AWS::StackName}-ELB
+      Scheme: internet-facing
+      SecurityGroups:
+        - !Ref LoadBalancerSG
+      Type: application
+      Subnets:
+        - Fn::ImportValue: !Sub ${VPCStackName}-Public-1
+        - Fn::ImportValue: !Sub ${VPCStackName}-Public-2
+  LBClientListener:
+    Type: "AWS::ElasticLoadBalancingV2::Listener"
+    Properties:
+      DefaultActions:
+        - TargetGroupArn: !Ref ClientTargetGroup
+          Type: forward
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 5000
+      Protocol: HTTP
+
+  LBServerListener:
+    Type: "AWS::ElasticLoadBalancingV2::Listener"
+    Properties:
+      DefaultActions:
+        - TargetGroupArn: !Ref ServerTargetGroup
+          Type: forward
+      LoadBalancerArn: !Ref LoadBalancer
+      Port: 8080
+      Protocol: HTTP
+Outputs:
+  ELBPublicDNS:
+    Description: Public DNS of the load balancer
+    Value: !GetAtt LoadBalancer.DNSName
+  ServerEC2IP:
+    Description: Private ip address of the server
+    Value: !GetAtt BackEndServerEC2.PublicIp
+  ClientEC2IP:
+    Description: Private ip address of the server
+    Value: !GetAtt FrontEndServerEC2.PublicIp
