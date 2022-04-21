@@ -16,3 +16,6 @@
 
 ### serverless doc
 - https://www.serverless.com/framework/docs/providers/aws/events/apigateway#example-lambda-proxy-event-default
+
+### Step function local development
+- https://tsh.io/blog/aws-step-functions-local-tutorial/
