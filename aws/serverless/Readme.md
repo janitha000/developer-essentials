@@ -19,3 +19,9 @@
 
 ### Step function local development
 - https://tsh.io/blog/aws-step-functions-local-tutorial/
+
+- aws stepfunctions --endpoint-url http://localhost:8083 create-state-machine --definition file://state-machine.asl.json --name "HelloWorld" --role-arn "arn:aws:iam::012345678901:role/DummyRole"
+- aws stepfunctions --endpoint-url http://localhost:8083 start-execution --state-machine-arn arn:aws:states:ap-southeast-1:123456789012:stateMachine:HelloWorld
+- aws stepfunctions --endpoint-url http://localhost:8083 delete-state-machine --state-machine-arn arn:aws:states:ap-southeast-1:123456789012:stateMachine:HelloWorld
+
+### 
