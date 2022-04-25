@@ -24,4 +24,5 @@
 - aws stepfunctions --endpoint-url http://localhost:8083 start-execution --state-machine-arn arn:aws:states:ap-southeast-1:123456789012:stateMachine:HelloWorld
 - aws stepfunctions --endpoint-url http://localhost:8083 delete-state-machine --state-machine-arn arn:aws:states:ap-southeast-1:123456789012:stateMachine:HelloWorld
 
-### 
+### Codepipelne with multiple yaml files
+- https://seed.run/blog/how-to-build-a-cicd-pipeline-for-serverless-apps-with-codepipeline-and-codebuild.html
