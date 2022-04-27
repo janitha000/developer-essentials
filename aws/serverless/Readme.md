@@ -29,3 +29,6 @@
 
 ### Request validation along with documentation
 - https://stackoverflow.com/questions/49133294/request-validation-using-serverless-framework
+
+### Development with serverless.ts
+- https://github.com/SamWSoftware/interviewAPI
