@@ -26,3 +26,6 @@
 
 ### Codepipelne with multiple yaml files
 - https://seed.run/blog/how-to-build-a-cicd-pipeline-for-serverless-apps-with-codepipeline-and-codebuild.html
+
+### Request validation along with documentation
+- https://stackoverflow.com/questions/49133294/request-validation-using-serverless-framework
