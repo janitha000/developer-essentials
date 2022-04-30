@@ -1,5 +1,6 @@
 ### Best practices
 - https://www.serverlessguru.com/blog/aws-serverless-development-coding-best-practices
+- https://www.ranthebuilder.cloud/post/aws-lambda-cookbook-elevate-your-handler-s-code-part-5-input-validation
 
 ### Monolothis Lambda vs Many Lambda
 - https://hackernoon.com/aws-lambda-should-you-have-few-monolithic-functions-or-many-single-purposed-functions-8c3872d4338f
