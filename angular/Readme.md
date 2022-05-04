@@ -30,3 +30,7 @@ ng-content - https://blog.angular-university.io/angular-ng-content/
 
 ### SPA single page application
 - UI loaded only once
+
+
+### Performence Tuning
+- https://christianlydemann.com/the-complete-guide-to-angular-performance-tuning/
