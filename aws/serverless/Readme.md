@@ -10,6 +10,7 @@
 
 ### Testing
 - https://javascript.plainenglish.io/how-to-start-typescript-node-aws-function-with-serverlessjs-ef4b55910127
+- https://levelup.gitconnected.com/unit-test-and-integration-test-for-aws-lambda-nodejs-in-typescript-2235a0f69f5
 
 ### Advanced with Typescript
 - https://levelup.gitconnected.com/creating-a-simple-serverless-application-using-typescript-and-aws-part-1-be2188f5ff93
