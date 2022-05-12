@@ -1,3 +1,7 @@
+### Serverless patterns
+- https://link.medium.com/IzLmRJJFXpb
+
+
 ### Best practices
 - https://www.serverlessguru.com/blog/aws-serverless-development-coding-best-practices
 - https://www.ranthebuilder.cloud/post/aws-lambda-cookbook-elevate-your-handler-s-code-part-5-input-validation
