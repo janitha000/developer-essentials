@@ -38,3 +38,6 @@
 
 ### Development with serverless.ts
 - https://github.com/SamWSoftware/interviewAPI
+
+### PostgreSQL
+- https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface
