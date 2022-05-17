@@ -41,3 +41,4 @@
 
 ### PostgreSQL
 - https://sequelize.org/api/v6/class/src/dialects/abstract/query-interface.js~queryinterface
+- https://medium.com/@eth3rnit3/sequelize-relationships-ultimate-guide-f26801a75554
