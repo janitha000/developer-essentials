@@ -34,3 +34,6 @@ ng-content - https://blog.angular-university.io/angular-ng-content/
 
 ### Performence Tuning
 - https://christianlydemann.com/the-complete-guide-to-angular-performance-tuning/
+
+### Kanban view
+- https://stackblitz.com/edit/angular-material-kanban-zgwmp2?file=src%2Fapp%2Fapp.component.html
