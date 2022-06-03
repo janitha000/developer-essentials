@@ -1,0 +1,3 @@
+### cross account deployment
+- https://lucid.app/lucidchart/ca9b8b13-e9d8-44f6-a5a4-dbb38ba54e53/edit?invitationId=inv_020514d7-7e43-4172-b3e6-9a1c49517c93&page=ct4kC0_44o7W#?referringapp=slack&login=slack
+- https://aws.amazon.com/blogs/devops/cross-account-ci-cd-pipeline-single-tenant-saas/?sc_channel=EL&sc_campaign=Demo_Problem_Solving_2021_vid&sc_medium=YouTube&sc_content=Video9982&sc_detail=DEVELOPER_TOOLS&sc_country=US
